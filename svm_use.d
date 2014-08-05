@@ -1,13 +1,13 @@
 import svm;
 import std.stdio;
 
-void main()
+void main_1()
 {
 	svm_node foo;
 	svm_node[2] anode; // = {};
 	svm_node[] bnode = new svm_node[2]; // = {};// = { 20, 10 };
 	writeln(anode.length);
-	//bnode.length = 5;
+	bnode.length = 5;
 	int x = do_something(&anode[0]);
 	svm_problem problem = svm_problem.init;
 	svm_parameter parameter = svm_parameter.init;
@@ -16,6 +16,7 @@ void main()
 	svm_cross_validation(&problem, &parameter, foldcount, &target);
 	writeln(anode == bnode);
 	writeln(foo);
+	main_2();
 }
 
 
@@ -27,3 +28,11 @@ void main_2()
 	svm_cross_validation(&problem, &parameter, 1, &target);
 	writeln(target);
 }
+
+unittest
+{
+	auto t = svm_problem();
+	assert(t.a != 5);
+	main_1();
+}
+
